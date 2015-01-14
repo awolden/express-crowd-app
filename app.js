@@ -7,7 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var crowdMiddleware = require('./lib/crowd-middleware');
-
+var config = require('./config.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,15 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(crowdMiddleware({
-    "crowd": {
-        "base": "http://forge.ochin.org/crowd/",
-    },
-    "application": {
-        "name": "my application",
-        "password": "pass123"
-    }
-}));
+app.use(crowdMiddleware(config.crowd));
 
 
 
