@@ -2,11 +2,11 @@ module.exports = {
 
     crowd: {
         "crowd": {
-            "base": "http://forge.ochin.org/crowd/",
+            "base": "http://localhost:8095/crowd",
         },
         "application": {
-            "name": "acuere-tools",
-            "password": "P@ssword2"
+            "name": "application name",
+            "password": "application password"
         }
     }
 };
