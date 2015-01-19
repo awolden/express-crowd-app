@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         browserify: {
             development: {
                 files: {
-                    './public/javascripts/app.js': ['./client/index.js']
+                    './public/js/app.js': ['./client/index.js']
                 }
             }
         }

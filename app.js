@@ -9,7 +9,8 @@ var express = require('express'),
     crowdMiddleware = require('./lib/crowd-middleware'),
     config = require('./config.js'),
     expressValidator = require('express-validator'),
-    session = require('express-session');
+    session = require('express-session'),
+    jadeStatic = require('connect-jade-static');
 
 
 var routes = require('./routes/index'),
@@ -49,6 +50,20 @@ app.use(session({
 /* Crowd Middleware */
 app.use(crowdMiddleware(config.crowd));
 
+//pass user info to client
+app.use(function (req, res, next) {
+    res.locals.user = (req.session.loggedIn) ? req.session.user : null;
+    next();
+});
+
+/* Use static routes for jade partials */
+app.use(jadeStatic({
+    baseDir: path.join(__dirname, '/views/partials'),
+    baseUrl: '/partials',
+    jade: {
+        pretty: true
+    }
+}));
 
 /* Routes */
 app.use('/', routes);

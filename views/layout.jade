@@ -1,7 +1,10 @@
 doctype html
 html
   head
-    title= title
+    title Express Crowd App
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    script.
+      var user = #{JSON.stringify(user)};
+  body(ng-app="crowd-app")
     block content
+    script(type='text/javascript',src="/js/app.js")
