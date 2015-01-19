@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* Session */
 app.use(cookieParser());
 app.use(session({
-    secret: 'Crowdcookieandshiz',
+    secret: '4G5hG39cX3fnD7igzpe2',
     rolling: true,
     resave: false,
     saveUninitialized: true,
