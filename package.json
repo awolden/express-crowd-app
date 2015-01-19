@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "preinstall": "sudo npm install -g nodemon && sudo npm install -g bower && sudo npm install -g grunt-cli",
-        "start": "nodemon index.js && grunt"
+        "start": "nodemon index.js & grunt"
     },
     "dependencies": {
         "async": "~0.9.0",

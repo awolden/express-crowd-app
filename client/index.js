@@ -3,7 +3,7 @@
 require('../bower_components/angular/angular.js');
 require('../bower_components/jquery/dist/jquery.min.js');
 require('../bower_components/bootstrap/dist/js/bootstrap.js');
-//require('underscore');
+require('underscore');
 
 /*
 Main App.js for user admin functionality
@@ -30,7 +30,6 @@ app.config(['$routeProvider',
 ]);
 
 app.run(function () {});
-
 
 app.config(['growlProvider',
     function (growlProvider) {

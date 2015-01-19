@@ -28405,7 +28405,7 @@ module.exports = new Importer();
 require('../bower_components/angular/angular.js');
 require('../bower_components/jquery/dist/jquery.min.js');
 require('../bower_components/bootstrap/dist/js/bootstrap.js');
-//require('underscore');
+require('underscore');
 
 /*
 Main App.js for user admin functionality
@@ -28433,7 +28433,6 @@ app.config(['$routeProvider',
 
 app.run(function () {});
 
-
 app.config(['growlProvider',
     function (growlProvider) {
         growlProvider.globalTimeToLive(10000);
@@ -28448,7 +28447,7 @@ app.controller(require('./controllers'));
 // app.filter(filters);
 // app.factory("userModel", userModel);
 // app.controller(controllers);
-},{"../bower_components/angular/angular.js":1,"../bower_components/bootstrap/dist/js/bootstrap.js":2,"../bower_components/jquery/dist/jquery.min.js":3,"./controllers":4}],6:[function(require,module,exports){
+},{"../bower_components/angular/angular.js":1,"../bower_components/bootstrap/dist/js/bootstrap.js":2,"../bower_components/jquery/dist/jquery.min.js":3,"./controllers":4,"underscore":13}],6:[function(require,module,exports){
 
 },{}],7:[function(require,module,exports){
 (function (process){
@@ -30530,4 +30529,6 @@ module.exports = self;
   }
 }.call(this));
 
-},{}]},{},[5]);
+},{}],13:[function(require,module,exports){
+module.exports=require(12)
+},{"/home/alex/Desktop/crowd-application/express-crowd-app/node_modules/module-importer/node_modules/underscore/underscore.js":12}]},{},[5]);
