@@ -1,7 +1,7 @@
 "use strict";
 
-module.exports = ['$scope', 'growl',
-    function ($scope, growl) {
+module.exports = ['$scope',
+    function ($scope) {
 
 
 
