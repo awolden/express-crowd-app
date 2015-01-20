@@ -1,9 +1,10 @@
 'use strict';
 
 require('../bower_components/angular/angular.js');
+require('../bower_components/angular-route/angular-route.js');
 require('../bower_components/jquery/dist/jquery.min.js');
 require('../bower_components/bootstrap/dist/js/bootstrap.js');
-require('underscore');
+//require('underscore');
 
 /*
 Main App.js for user admin functionality
@@ -12,7 +13,7 @@ Main App.js for user admin functionality
 /* global window, angular */
 
 //define app
-var app = angular.module('crowd-app', []);
+var app = angular.module('crowd-app', ['ngRoute']);
 
 app.constant("CROWD_USER", window.user);
 
@@ -30,12 +31,6 @@ app.config(['$routeProvider',
 ]);
 
 app.run(function () {});
-
-app.config(['growlProvider',
-    function (growlProvider) {
-        growlProvider.globalTimeToLive(10000);
-    }
-]);
 
 
 //import directives and controllers
