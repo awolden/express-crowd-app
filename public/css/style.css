@@ -1,3 +1,12 @@
 .login-box {
     margin-top: 50px
 }
+.login-box h3 {
+    margin-top: 0px;
+}
+.login-box .login-status {
+    margin-left: 5px;
+}
+body {
+    background-image: url('../images/lil_fiber.png');
+}

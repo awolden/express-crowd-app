@@ -1,6 +1,6 @@
 .container
   .row
-    .col-sm-4.col-sm-offset-4
+    .col-sm-6.col-sm-offset-3
       .well.login-box
         h3 Login To The Crowd App
         form
@@ -9,9 +9,10 @@
           .alert.alert-success(ng-if="status === 'Success'")
             | Successfully logged in. Redirecting...
           .form-group
-              label(for='Username') Username 
-                input#Username.form-control(type='text', placeholder='Username', ng-model="username")  
+            label(for='Username') Username 
+            input#Username.form-control(type='text', placeholder='Username', ng-model="username")  
           .form-group
             label(for='Password') Password  
             input#Password.form-control(type='password', placeholder='Password', ng-model="password")
           button.btn.btn-default(type="submit", ng-click="authenticate()") Submit
+          span.login-status(ng-if="status") {{status}}

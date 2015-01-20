@@ -11,6 +11,8 @@ module.exports = ['$scope', 'Auth', '$location',
 
             if (!$scope.username || !$scope.password) return;
 
+            $scope.status = "Authenticating...";
+
             Auth.login($scope.username, $scope.password).then(function (user) {
                 $scope.error = "";
                 $scope.status = "Success";

@@ -10,8 +10,9 @@ cluster.setupMaster({
 });
 
 console.log("Starting Children: ");
+var numOfChildren = 1;
 if (cluster.isMaster) {
-    for (var i = 0; i < os.cpus().length; i++) {
+    for (var i = 0; i < numOfChildren; i++) {
         console.log("Starting Child: " + i);
         cluster.fork();
     }

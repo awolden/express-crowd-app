@@ -29391,10 +29391,22 @@ if (typeof jQuery === 'undefined') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],5:[function(require,module,exports){
+"use strict";
+
+module.exports = ['$scope', 'Auth', '$location',
+    function ($scope, Auth, $location) {
+
+        $scope.user = Auth.getUser();
+
+
+    }
+];
+},{}],6:[function(require,module,exports){
 'use strict';
 
 exports.login = require("./login");
-},{"./login":6}],6:[function(require,module,exports){
+exports.appHome = require("./app-home");
+},{"./app-home":5,"./login":7}],7:[function(require,module,exports){
 "use strict";
 
 module.exports = ['$scope', 'Auth', '$location',
@@ -29407,6 +29419,8 @@ module.exports = ['$scope', 'Auth', '$location',
             console.log("authentications");
 
             if (!$scope.username || !$scope.password) return;
+
+            $scope.status = "Authenticating...";
 
             Auth.login($scope.username, $scope.password).then(function (user) {
                 $scope.error = "";
@@ -29421,18 +29435,21 @@ module.exports = ['$scope', 'Auth', '$location',
 
     }
 ];
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 /* global CROWD_USER */
 
 module.exports = ['CROWD_USER', '$http', '$q',
     function (CROWD_USER, $http, $q) {
-        var user = CROWD_USER;
+        var session = CROWD_USER;
 
         return {
+            getUser: function () {
+                return session.user;
+            },
             isLoggedIn: function () {
-                return user && user.loggedIn;
+                return session && session.loggedIn;
             },
             login: function (username, password) {
 
@@ -29444,7 +29461,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
                         password: password
                     })
                     .success(function (data, status) {
-                        user = data;
+                        session = data;
                         deferred.resolve(data);
                     })
                     .error(function (err, status) {
@@ -29460,11 +29477,11 @@ module.exports = ['CROWD_USER', '$http', '$q',
         };
     }
 ];
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 exports.Auth = require("./auth");
-},{"./auth":7}],9:[function(require,module,exports){
+},{"./auth":8}],10:[function(require,module,exports){
 'use strict';
 
 require('../bower_components/angular/angular.js');
@@ -29488,11 +29505,14 @@ app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
         when('/login', {
-            templateUrl: '/partials/login.html',
-            controller: 'login'
-        }).
+                templateUrl: '/partials/login.html',
+                controller: 'login'
+            })
+            .when('/', {
+                templateUrl: '/partials/app-home.html',
+                controller: 'appHome'
+            }).
         otherwise({
-            templateUrl: '/partials/app-home.html',
             redirectTo: '/'
         });
     }
@@ -29530,4 +29550,4 @@ app.run(['$rootScope', '$location', 'Auth',
 // app.filter(filters);
 
 // app.controller(controllers);
-},{"../bower_components/angular-route/angular-route.js":1,"../bower_components/angular/angular.js":2,"../bower_components/bootstrap/dist/js/bootstrap.js":3,"../bower_components/jquery/dist/jquery.min.js":4,"./controllers":5,"./factories":8}]},{},[9]);
+},{"../bower_components/angular-route/angular-route.js":1,"../bower_components/angular/angular.js":2,"../bower_components/bootstrap/dist/js/bootstrap.js":3,"../bower_components/jquery/dist/jquery.min.js":4,"./controllers":6,"./factories":9}]},{},[10]);

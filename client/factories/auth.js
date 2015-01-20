@@ -4,11 +4,14 @@
 
 module.exports = ['CROWD_USER', '$http', '$q',
     function (CROWD_USER, $http, $q) {
-        var user = CROWD_USER;
+        var session = CROWD_USER;
 
         return {
+            getUser: function () {
+                return session.user;
+            },
             isLoggedIn: function () {
-                return user && user.loggedIn;
+                return session && session.loggedIn;
             },
             login: function (username, password) {
 
@@ -20,7 +23,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
                         password: password
                     })
                     .success(function (data, status) {
-                        user = data;
+                        session = data;
                         deferred.resolve(data);
                     })
                     .error(function (err, status) {

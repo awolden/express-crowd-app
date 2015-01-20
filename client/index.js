@@ -21,11 +21,14 @@ app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
         when('/login', {
-            templateUrl: '/partials/login.html',
-            controller: 'login'
-        }).
+                templateUrl: '/partials/login.html',
+                controller: 'login'
+            })
+            .when('/', {
+                templateUrl: '/partials/app-home.html',
+                controller: 'appHome'
+            }).
         otherwise({
-            templateUrl: '/partials/app-home.html',
             redirectTo: '/'
         });
     }
