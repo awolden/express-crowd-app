@@ -6,7 +6,7 @@ html
     link(rel='stylesheet', href='/css/bootstrap/bootstrap.min.css')
     link(rel='stylesheet', href='/css/bootstrap/bootstrap-theme.min.css')  
     script.
-      var user = #{JSON.stringify(user)};
+      var user = !{JSON.stringify(session)};
   body(ng-app="crowd-app")
     block content
     script(type='text/javascript',src="/js/app.js")

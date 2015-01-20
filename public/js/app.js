@@ -29397,8 +29397,8 @@ exports.login = require("./login");
 },{"./login":6}],6:[function(require,module,exports){
 "use strict";
 
-module.exports = ['$scope', 'Auth',
-    function ($scope, Auth) {
+module.exports = ['$scope', 'Auth', '$location',
+    function ($scope, Auth, $location) {
 
         $scope.status = "";
         $scope.error = "";
@@ -29409,9 +29409,12 @@ module.exports = ['$scope', 'Auth',
             if (!$scope.username || !$scope.password) return;
 
             Auth.login($scope.username, $scope.password).then(function (user) {
-                console.log("success!", user);
+                $scope.error = "";
+                $scope.status = "Success";
+                $location.path("/");
             }, function (err) {
-                console.log("err!", err);
+                $scope.error = err.message;
+                $scope.status = "";
             });
         };
 
@@ -29429,7 +29432,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
 
         return {
             isLoggedIn: function () {
-                return user && user.isLoggedIn;
+                return user && user.loggedIn;
             },
             login: function (username, password) {
 
@@ -29445,7 +29448,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
                         deferred.resolve(data);
                     })
                     .error(function (err, status) {
-                        deferred.resolve(err);
+                        deferred.reject(err);
                     });
 
 
@@ -29489,6 +29492,7 @@ app.config(['$routeProvider',
             controller: 'login'
         }).
         otherwise({
+            templateUrl: '/partials/app-home.html',
             redirectTo: '/'
         });
     }
@@ -29506,6 +29510,7 @@ app.run(['$rootScope', '$location', 'Auth',
 
             //redirect to login page if not logged in
             if (!Auth.isLoggedIn()) {
+                console.log("not logged in, redirecting...");
                 $location.path('/login');
             }
             else {

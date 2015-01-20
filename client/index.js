@@ -25,6 +25,7 @@ app.config(['$routeProvider',
             controller: 'login'
         }).
         otherwise({
+            templateUrl: '/partials/app-home.html',
             redirectTo: '/'
         });
     }
@@ -42,6 +43,7 @@ app.run(['$rootScope', '$location', 'Auth',
 
             //redirect to login page if not logged in
             if (!Auth.isLoggedIn()) {
+                console.log("not logged in, redirecting...");
                 $location.path('/login');
             }
             else {

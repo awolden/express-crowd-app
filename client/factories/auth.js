@@ -8,7 +8,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
 
         return {
             isLoggedIn: function () {
-                return user && user.isLoggedIn;
+                return user && user.loggedIn;
             },
             login: function (username, password) {
 
@@ -24,7 +24,7 @@ module.exports = ['CROWD_USER', '$http', '$q',
                         deferred.resolve(data);
                     })
                     .error(function (err, status) {
-                        deferred.resolve(err);
+                        deferred.reject(err);
                     });
 
 

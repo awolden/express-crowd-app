@@ -52,7 +52,7 @@ app.use(crowdMiddleware(config.crowd));
 
 //pass user info to client
 app.use(function (req, res, next) {
-    res.locals.user = (req.session.loggedIn) ? req.session.user : null;
+    res.locals.session = (req.session.loggedIn) ? req.session : null;
     next();
 });
 
