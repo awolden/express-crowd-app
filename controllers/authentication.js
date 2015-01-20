@@ -57,16 +57,12 @@ self.logout = function (req, res) {
                 });
                 return;
             }
-            res.send(req.session);
+            res.redirect("/#/login");
             return;
         });
     }
     else {
-        res.status(400);
-        res.send({
-            'status': 'error',
-            'msg': 'You are not currently logged in'
-        });
+        res.redirect("/#/login");
         return;
     }
 };

@@ -1,16 +1,17 @@
 .container
-  .row.text-center
-    .col-sm-6.text-left
-      h3 Login To The Crowd App
-      form
-        .alert.alert-danger(ng-if="error")
-          {{error}}
-        .alert.alert-success(ng-if="status === 'Success'")
-          | Successfully logged in. Redirecting...
-        .form-group
-            label(for='Username') Username 
-              input#Username.form-control(type='text', placeholder='Username', ng-model="username")  
-        .form-group
-          label(for='Password') Password  
-          input#Password.form-control(type='password', placeholder='Password', ng-model="password")
-        button.btn.btn-default(type="submit", ng-click="authenticate()") Submit
+  .row
+    .col-sm-4.col-sm-offset-4
+      .well.login-box
+        h3 Login To The Crowd App
+        form
+          .alert.alert-danger(ng-if="error")
+            {{error}}
+          .alert.alert-success(ng-if="status === 'Success'")
+            | Successfully logged in. Redirecting...
+          .form-group
+              label(for='Username') Username 
+                input#Username.form-control(type='text', placeholder='Username', ng-model="username")  
+          .form-group
+            label(for='Password') Password  
+            input#Password.form-control(type='password', placeholder='Password', ng-model="password")
+          button.btn.btn-default(type="submit", ng-click="authenticate()") Submit
