@@ -30,13 +30,34 @@ app.config(['$routeProvider',
     }
 ]);
 
-app.run(function () {});
-
-
 //import directives and controllers
 app.controller(require('./controllers'));
+app.factory(require('./factories'));
+
+
+//Global Angular Code
+app.run(['$rootScope', '$location', 'Auth',
+    function ($rootScope, $location, Auth) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+
+            //redirect to login page if not logged in
+            if (!Auth.isLoggedIn()) {
+                $location.path('/login');
+            }
+            else {
+                //do nothing
+            }
+        });
+
+    }
+]);
+
+
+
+
+
 
 //assign directives and controllers
 // app.filter(filters);
-// app.factory("userModel", userModel);
+
 // app.controller(controllers);

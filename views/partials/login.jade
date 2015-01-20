@@ -4,8 +4,9 @@
       h3 Login To The Crowd App
       form
         .form-group
-            label(for='exampleInputEmail1') Email address 
-              input#exampleInputEmail1.form-control(type='email', placeholder='Enter email')  
+            label(for='Username') Username 
+              input#Username.form-control(type='text', placeholder='Username', ng-model="username")  
         .form-group
-          label(for='exampleInputPassword1') Password  
-          input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+          label(for='Password') Password  
+          input#Password.form-control(type='password', placeholder='Password', ng-model="password")
+        button.btn.btn-default(type="submit", ng-click="authenticate()") Submit

@@ -29397,10 +29397,71 @@ exports.login = require("./login");
 },{"./login":6}],6:[function(require,module,exports){
 "use strict";
 
-module.exports = ['$scope',
-    function ($scope) {}
+module.exports = ['$scope', 'Auth',
+    function ($scope, Auth) {
+
+        $scope.status = "";
+        $scope.error = "";
+
+        $scope.authenticate = function () {
+            console.log("authentications");
+
+            if (!$scope.username || !$scope.password) return;
+
+            Auth.login($scope.username, $scope.password).then(function (user) {
+                console.log("success!", user);
+            }, function (err) {
+                console.log("err!", err);
+            });
+        };
+
+
+    }
 ];
 },{}],7:[function(require,module,exports){
+"use strict";
+
+/* global CROWD_USER */
+
+module.exports = ['CROWD_USER', '$http', '$q',
+    function (CROWD_USER, $http, $q) {
+        var user = CROWD_USER;
+
+        return {
+            isLoggedIn: function () {
+                return user && user.isLoggedIn;
+            },
+            login: function (username, password) {
+
+                var deferred = $q.defer();
+
+                $http
+                    .post("/auth/login", {
+                        username: username,
+                        password: password
+                    })
+                    .success(function (data, status) {
+                        user = data;
+                        deferred.resolve(data);
+                    })
+                    .error(function (err, status) {
+                        deferred.resolve(err);
+                    });
+
+
+                return deferred.promise;
+            },
+            logout: function () {
+                //todo: logout
+            }
+        };
+    }
+];
+},{}],8:[function(require,module,exports){
+'use strict';
+
+exports.Auth = require("./auth");
+},{"./auth":7}],9:[function(require,module,exports){
 'use strict';
 
 require('../bower_components/angular/angular.js');
@@ -29433,14 +29494,35 @@ app.config(['$routeProvider',
     }
 ]);
 
-app.run(function () {});
-
-
 //import directives and controllers
 app.controller(require('./controllers'));
+app.factory(require('./factories'));
+
+
+//Global Angular Code
+app.run(['$rootScope', '$location', 'Auth',
+    function ($rootScope, $location, Auth) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+
+            //redirect to login page if not logged in
+            if (!Auth.isLoggedIn()) {
+                $location.path('/login');
+            }
+            else {
+                //do nothing
+            }
+        });
+
+    }
+]);
+
+
+
+
+
 
 //assign directives and controllers
 // app.filter(filters);
-// app.factory("userModel", userModel);
+
 // app.controller(controllers);
-},{"../bower_components/angular-route/angular-route.js":1,"../bower_components/angular/angular.js":2,"../bower_components/bootstrap/dist/js/bootstrap.js":3,"../bower_components/jquery/dist/jquery.min.js":4,"./controllers":5}]},{},[7]);
+},{"../bower_components/angular-route/angular-route.js":1,"../bower_components/angular/angular.js":2,"../bower_components/bootstrap/dist/js/bootstrap.js":3,"../bower_components/jquery/dist/jquery.min.js":4,"./controllers":5,"./factories":8}]},{},[9]);
