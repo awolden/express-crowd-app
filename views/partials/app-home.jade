@@ -5,4 +5,18 @@
         | Welcome to the Express Crowd Application
         div
           small.muted You are logged in as:
-        
+      div
+        strong Name:
+        span {{user["display-name"]}}
+      div
+        strong Username:
+        span {{user.name}}
+      div
+        strong Email:
+        span {{user.email}}
+      div
+        strong Groups:
+        div {{user.groups.join(', ')}}
+      div
+        strong
+          a(href="/auth/logout") Logout
